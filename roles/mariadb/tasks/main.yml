@@ -4,7 +4,7 @@
   command: sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 
 - name: add mariadb apt repo to sources
-  apt_repository: repo='deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu precise main'
+  apt_repository: repo=deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/debian wheezy main
 
 - name: update apt repo
   apt: update-cache=yes

@@ -1,8 +1,7 @@
 --- 
 
 - name: Add Nginx stable repo
-  apt_repository: repo=ppa:nginx/stable
-  # apt_repository: repo=ppa:nginx/development
+  apt_repository: repo=deb http://nginx.org/packages/debian/ wheezy nginx
 
 - name: update apt repo
   apt: update-cache=yes
