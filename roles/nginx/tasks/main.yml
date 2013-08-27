@@ -1,7 +1,9 @@
 --- 
+- name: Add nginx key
+  shell: "curl http://nginx.org/keys/nginx_signing.key| apt-key add -"
 
 - name: Add Nginx stable repo
-  apt_repository: repo=deb http://nginx.org/packages/debian/ wheezy nginx
+  apt_repository: repo='deb http://nginx.org/packages/debian/ wheezy nginx'
 
 - name: update apt repo
   apt: update-cache=yes
