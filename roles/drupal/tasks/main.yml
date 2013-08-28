@@ -30,13 +30,12 @@
   command: pear install Console_Table 
            creates=/usr/share/php/.registry/console_table.reg
 
-- name: Add Drush to pear channels
-  command: pear channel-discover pear.drush.org 
-           creates=/usr/share/php/.channels/pear.drush.org.reg
-
 - name: Install Drush
-  command: sudo pear install drush/drush 
-           creates=/usr/share/php/.registry/.channel.pear.drush.org/drush.reg
+  command: git clone --branch master git://github.com/drush-ops/drush /opt/drush
+           creates=/opt/drush/drush
+
+- name: symlink drush
+  file: src=/opt/drush/drush dest=/usr/bin/drush state=link
 
 # Installing Drush with apt is faster, but you get an old version
 # - name: Install Drush

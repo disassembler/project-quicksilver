@@ -22,12 +22,18 @@
                 priv={{ item.db }}.*:ALL state=present
     with_items: $profiles
 
-    #TODO: Unique code starts here - pull out dupe code above
+  - name: Download Project with git
+    command: /usr/bin/git clone --branch {{ item.gitbranch }} {{ item.giturl }} {{ website_root }}{{ item.name }}
+             creates={{ website_root }}{{ item.name }}/index.php
+    with_items: $profiles
+    only_if: is_set('item.giturl')
+
   - name: Download distro with Drush
     command: /usr/bin/drush @{{ item.name }} pm-download -y {{ item.distro }} 
              --destination={{ website_root }}{{ item.name }} --drupal-project-rename=drupal
              creates={{ website_root }}{{ item.name }}/index.php
     with_items: $profiles
+    only_if: is_set('item.distro')
 
   - name: Move the distro files to site root
     shell: /bin/mv {{ website_root }}{{ item.name }}/drupal/* {{ website_root }}{{ item.name }}/
