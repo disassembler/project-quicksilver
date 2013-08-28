@@ -6,7 +6,7 @@ Project Quicksilver uses [Ansible](http://ansible.cc/) to provision a full, high
 ##Install
 * [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 * [Install Vagrant 1.2 or higher](http://downloads.vagrantup.com/)
-* Set up Ubuntu 12.04 box `base` on vagrant - `vagrant box add base http://files.vagrantup.com/precise64.box`
+* Set up Debian 7 (Wheezy) box `base` on vagrant - `vagrant box add base http://dl.dropbox.com/u/937870/VMs/wheezy64.box`
 * [Install Ansible](http://ansible.cc/docs/gettingstarted.html) (mac users may want to try [these instructions](https://weluse.de/blog/installing-ansible-on-os-x.html), and Linux users can try the [setup instructions using Pip](http://ansible.cc/docs/gettingstarted.html#via-pip)). Sorry, Ansible does not support Windows at this time[(although there are discussions about it)](https://groups.google.com/forum/#!topic/ansible-project/17YZIgArn2g), but you could run Project Quicksilver from a VirtualBox vm or a Linux server, if you have one you can ssh into.
 * Set up fireball. This makes ansible much faster.
 
