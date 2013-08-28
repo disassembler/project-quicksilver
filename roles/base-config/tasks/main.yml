@@ -40,6 +40,11 @@
   - name: install zsh
     apt: name=zsh state=installed 
 
+  - name: set up public key access for vagrant user
+    authorized_key: user=vagrant key="{{ item.ssh_key }}"
+    only_if: "'{{ item.ssh_key }}' != ''"
+    with_items: $vagrant
+
   - name: create developer group
     group: name=developer
 
@@ -57,14 +62,6 @@
           password={{ webmaster_password }}
           shell=/usr/bin/zsh
 
-  - name: load oh-my-zsh for webmaster
-    git:  repo='git://github.com/robbyrussell/oh-my-zsh.git'
-          dest='/home/{{ webmaster_account }}/.oh-my-zsh'
-
-  - name: configure oh-my-zsh
-    template: src=home-user-.zshrc.j2
-              dest='/home/{{ webmaster_account }}/.zshrc'
-
   - name: set up developer accounts
     user: name={{ item.name }}
           append=yes
@@ -74,21 +71,15 @@
           shell=/usr/bin/zsh
     with_items: $developers
     
-  - name: set up public key access to developer accounts
-    copy: src={{ item.ssh_key_file }}
-          dest=/home/{{ item.name }}/.ssh/authorized_keys
-          force=no
-    only_if: "'{{ item.ssh_key_file }}' != ''"
+  - name: bootstrap developer account
+    shell: sudo -u {{ item.name }} bash -c "curl {{ item.bootstrap }} | bash"
+             creates=/home/{{item.name}}/.zshrc
+    only_if: "'{{ item.bootstrap }}' != ''"
     with_items: $developers
 
-  - name: load oh-my-zsh for developers
-    git:  repo='git://github.com/robbyrussell/oh-my-zsh.git'
-          dest='/home/{{ item.name }}/.oh-my-zsh'
-    with_items: $developers
-
-  - name: configure oh-my-zsh
-    template: src=home-user-.zshrc.j2
-              dest='/home/{{ item.name }}/.zshrc'
+  - name: set up public key access for developer accounts
+    authorized_key: user=vagrant key="{{ item.ssh_key }}"
+    only_if: "'{{ item.ssh_key }}' != ''"
     with_items: $developers
 
   - name: set up user accounts

@@ -39,16 +39,24 @@ locale: en_US.UTF-8
 webmaster_account: webmaster
 webmaster_password: ''
 
-# list account names; set to [] to skip
+# list account names; set to [] to skip 
 # developers have sudo privileges & belong to group "developer" - see /base-config/tasks/setup.yml for details
+# Put the text of your ssh key in ssh_key. Is a first run script that can setup
+# your environment however you would like. To see an example of a bootstrap
+# script, see: https://raw.github.com/disassembler/dotfiles/master/bootstrap-linux.sh
 developers:
   - name: chris
     password: ''
-    ssh_key_file: ''
+    ssh_key: ''
+    bootstrap: 
   - name: robert
     password: ''
-    ssh_key_file: ''
+    ssh_key: ''
 
+# Your ssh key so you can run ansible-playbook.yml commands.
+vagrant:
+  - name: Vagrant User
+    ssh_key: ''
 
 # list account names; set to [] to skip
 users: []
