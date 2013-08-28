@@ -11,7 +11,9 @@ Project Quicksilver uses [Ansible](http://ansible.cc/) to provision a full, high
 * Set up fireball. This makes ansible much faster.
 
         sudo easy_install pip    
-        sudo pip install pyzmq PyCrypto python-keyczar 
+        sudo pip install pyzmq PyCrypto python-pyasn1 
+        pip install
+        https://keyczar.googlecode.com/files/python-keyczar-0.71c.tar.gz
 
 * Clone or Download the Project Quicksilver repo. 
 * Go to your project directory and run:
