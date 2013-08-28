@@ -37,10 +37,6 @@
 - name: symlink drush
   file: src=/opt/drush/drush dest=/usr/bin/drush state=link
 
-# Installing Drush with apt is faster, but you get an old version
-# - name: Install Drush
-#   apt: name=drush
-
 # Will use this directory to store site aliases
 - name: create directory /etc/drush/
   file: dest='/etc/drush'
